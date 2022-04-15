@@ -1,0 +1,22 @@
+.bg{
+    background-color:darkblue;
+}
+
+.labels{
+    width: 100%;
+}
+
+.controls{
+    width: 100%;
+}
+
+@media(min-width: 768px){
+    .controls{
+        width:60%;
+    }
+}
+
+#logo{
+    width: 200px;
+    height: 200px;
+}
