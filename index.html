@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin/style.css">
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css">
+    <script type="text/javascript" src="admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="admin/js/jquery.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: 'admin/getBrandingImage.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+                    $('.navbar-brand').prepend(`<img src="admin/${data.branding_image}" class="img-fluid" id="branding-img">`);
+                }
+            })
+
+            $.ajax({
+                type: 'GET',
+                url: 'admin/getBrandingName.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+                    $('#branding-text').prepend(data.branding_name);
+                }
+            })
+
+            $.ajax({
+                type: 'GET',
+                url: 'admin/getHeaderTitleAndText.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+
+                    $(data).each(function(index, value){
+                        if(index == 0){
+                            $('#header-title').append(`<h1>${value.title}</h1>`);
+                        }else{
+                            $('#header-title').append(`<p class="lead">${value.descript}</p>`);
+                        }
+
+                    });
+                    $('#header-title').append(`<button class="btn btn-primary px-5 shadow">Contact Us</button>`)
+                }
+            })
+
+            $.ajax({
+                type: 'GET',
+                url: 'admin/getBrandingImage.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+                    $('#header-image').append(`<img src="admin/${data.branding_image}" class="img-fluid d-none d-md-block" id="header-img">`);
+                }
+            })
+        });
+    </script>
+    <title>CMB Staffing Inc.</title>
+</head>
+<body class="bg=light">
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg navbar-dark">
+        <div class="container">
+            <div class="navbar-brand">
+                <span id="branding-text" class="text-light">
+
+                </span>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-3">
+                        <a href="" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <a href="" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <a href="" class="nav-link">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="container d-md-flex justify-content-between align-items-center my-5 my-md-1 text-center text-md-start" id="container-bg">
+        <div id="header-title" class="col">
+            
+        </div>
+
+        <div id="header-image" class="col">
+            
+        </div>
+    </div>
+
+    <!-- About Us -->
+    <div class="p-5 bg text-light text-center text-md-start">
+        <div class="container">
+            <h1>WE CLEAN...</h1>
+            <p class="lead">We are a cleaning company with a huge pool of cleaning professionals</p>
+        </div>
+    </div>
+    
+    <!-- Services -->
+    <div class="container">
+        <h1 class="text-center my-5 fs-1">Our Services</h1>
+    </div>
+</body>
+</html>
