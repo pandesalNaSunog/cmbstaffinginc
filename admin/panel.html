@@ -21,6 +21,9 @@
             var headerTitleText = $('#header-title-text');
             var headerDescText = $('#header-description-text');
             var updateHeaderDescription = $('#update-header-description');
+            var serviceTitle = $('#service-title');
+            var serviceDescription = $('#service-description');
+            var addService = $('#add-service');
             $.ajax({
                 type: 'GET',
                 url: 'getBrandingName.php',
@@ -39,7 +42,25 @@
                     logo.attr('src', data.branding_image);
                 }
             })
-            
+            addService.on('click', function(e){
+                e.preventDefault();
+
+                if(serviceTitle.val() != "" && serviceDescription.val() != ""){
+                    $.ajax({
+                        type: 'POST',
+                        url: 'addService.php',
+                        data: {title: serviceTitle.val(), description: serviceDescription.val()},
+                        success: function(response){
+                            if(response == "already exists"){
+                                alert("This service already exists");
+                            }else{
+                                $('#service-added-toast').toast({delay:5000});
+                                $('#service-added-toast').toast("show");
+                            }
+                        }
+                    })
+                }
+            });
             updateHeaderDescription.on('click', function(e){
                 e.preventDefault();
 
@@ -161,8 +182,6 @@
                         <hr>
 
                     <form action="">
-
-                    
                         <div class="row my-3">
                             <label class="form-label labels p-md-3 col-md-5"><b>Site Branding Name</b></label>
                             <input type="text" class="form-control mt-md-3 controls col-md-7" id="branding-name" required>
@@ -170,11 +189,7 @@
                         <div class="d-grid gap-2 d-md-block">
                             <button class="btn btn-primary mt-3 px-5" id="update-branding-name"><b>Save</b></button>
                         </div>
-
                     </form>
-                    
-                    
-                
             </div>
         </div>
     </div>
@@ -222,6 +237,36 @@
         </div>
     </div>
 
+    <!-- Services -->
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-body p-5">
+                <h1>Services</h1>
+                <hr>
+                <div class="row my-5">
+                    <div class="col-md-5">
+                        <b>Service Title</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="service-title" required>
+                    </div>
+                </div>
+                <div class="row my-5">
+                    <div class="col-md-5">
+                        <b>Service Description</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="service-description" required>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary mt-3 px-5" id="add-service"><b>Add</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Branding Name Update Toast -->
     <div class="container">
         <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast">
@@ -251,6 +296,17 @@
             <div class="d-flex">
                 <div class="toast-body">
                     Site Header Description has been updated!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <!-- Service addedd toast -->
+    <div class="container">
+        <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="service-added-toast">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Site Service has been added!
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>

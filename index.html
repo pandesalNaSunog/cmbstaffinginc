@@ -11,6 +11,27 @@
 
     <script>
         $(document).ready(function(){
+
+            $.ajax({
+                type: 'GET',
+                url: 'getServices.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+
+                    $(data).each(function(index,value){
+                        $('#services-here').append(
+                            `<div class="card col col-lg-3 shadow p-3 my-3 mx-2">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <h3>${value.title}</h3>
+
+                                        <p class="lead">${value.description}</p>
+                                    </div>
+                                </div>
+                            </div>`)
+                    });
+                }
+            })
             $.ajax({
                 type: 'GET',
                 url: 'admin/getBrandingImage.php',
@@ -37,7 +58,7 @@
 
                     $(data).each(function(index, value){
                         if(index == 0){
-                            $('#header-title').append(`<h1>${value.title}</h1>`);
+                            $('#header-title').append(`<h1><b>${value.title}</b></h1>`);
                         }else{
                             $('#header-title').append(`<p class="lead">${value.descript}</p>`);
                         }
@@ -59,7 +80,7 @@
     </script>
     <title>CMB Staffing Inc.</title>
 </head>
-<body class="bg=light">
+<body class="bg-light">
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg bg navbar-dark">
         <div class="container">
@@ -78,7 +99,7 @@
                         <a href="" class="nav-link">About Us</a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a href="" class="nav-link">Services</a>
+                        <a href="#services" class="nav-link">Services</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a href="" class="nav-link">Contact Us</a>
@@ -102,14 +123,44 @@
     <!-- About Us -->
     <div class="p-5 bg text-light text-center text-md-start">
         <div class="container">
-            <h1>WE CLEAN...</h1>
+            <h1><b>WE CLEAN...</b></h1>
             <p class="lead">We are a cleaning company with a huge pool of cleaning professionals</p>
         </div>
     </div>
     
     <!-- Services -->
-    <div class="container">
-        <h1 class="text-center my-5 fs-1">Our Services</h1>
+    <div class="container text-center" id="services">
+        <h1 class="text-center mt-5 fs-1"><b>Our Services</b></h1>
+
+        <div id="services-here" class="d-md-flex justify-content-evenly p-4 text-center">
+
+        </div>
+
+        <div class="d-grid gap-2 d-md-block mb-5">
+            <button class="btn btn-primary mt-3 px-5" id="add-service"><b>See More...</b></button>
+        </div>
+    </div>
+
+    <!-- footer -->
+
+    <div class="p-5 text-light text-center bg" id="footer">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="col col-md-2">
+                <img src="admin/images/logo-modified.png" class="img-fluid" alt="">
+                <h3>CMB Staffing Inc.</h3>
+            </div>
+            <div class="col col-md-6">
+                <h1>Call us TODAY for your free estimates!</h1>
+                <h1>647-575-5841 or 647-267-5841</h1>
+                <br>
+                <br>
+
+                <p><b>Office: 1470 Eglinton Ave, West Toronto, ON M6E 2G6</b></p>
+                <p><b>Phone: 647-575-5841 or 647-267-5841</b></p>
+                <p><b>Email: topskillstaffinginc@yahoo.ca</b></p>
+            </div>
+            
+        </div>
     </div>
 </body>
 </html>
