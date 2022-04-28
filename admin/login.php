@@ -1,27 +1,35 @@
 <?php
 
-    include('connection.php');
-    $con = connect();
+    
+        include('connection.php');
+        $con = connect();
 
-    if(isset($_POST)){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        if(isset($_POST)){
+            
+            $email = $_POST['email'];
+            $password = $_POST['password'];
 
-        $query = "SELECT * FROM admin_creds WHERE email = '$email'";
-        $user = $con->query($query) or die($con->error);
-        $data = array();
+            
 
-        while($row = $user->fetch_assoc()){
-            $data[] = $row;
-        }
-        
-        if(count($data) != 0){
-            if(password_verify($password, $data[0]['password'])){
-                $response = 'ok';
+            $query = "SELECT * FROM admin_creds WHERE email = '$email'";
+            $user = $con->query($query) or die($con->error);
+            $data = array();
+
+            while($row = $user->fetch_assoc()){
+                $data[] = $row;
             }
-        }else{
-            $response = 'invalid';
+            
+            if(count($data) != 0){
+                if(password_verify($password, $data[0]['password'])){
+                    $response = 'ok';
+                    session_start();
+                    $_SESSION['email'] = $email;
+                }
+            }else{
+                $response = 'invalid';
+            }
+            echo $response;
         }
-        echo $response;
-    }
+
+    
 ?>

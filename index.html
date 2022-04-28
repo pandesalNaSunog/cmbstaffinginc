@@ -14,13 +14,39 @@
 
             $.ajax({
                 type: 'GET',
+                url: 'getFooterDetails.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+
+                    $('#footer').append(`<div class="container d-md-flex justify-content-between align-items-center">
+                                            <div class="col col-md-2">
+                                                <img src="admin/images/logo-modified.png" class="img-fluid" alt="">
+                                                <h3>CMB Staffing Inc.</h3>
+                                            </div>
+                                            <div class="col col-md-6">
+                                                <h1>Call us TODAY for your free estimates!</h1>
+                                                <h1>${data.phone}</h1>
+                                                <br>
+                                                <br>
+
+                                                <p><b>Office: ${data.office}</b></p>
+                                                <p><b>Phone: ${data.phone}</b></p>
+                                                <p><b>Email: ${data.email}</b></p>
+                                            </div>
+                                            
+                                        </div>`);
+                }
+            })
+
+            $.ajax({
+                type: 'GET',
                 url: 'getServices.php',
                 success: function(response){
                     var data = JSON.parse(response);
 
                     $(data).each(function(index,value){
                         $('#services-here').append(
-                            `<div class="card col col-lg-3 shadow p-3 my-3 mx-2">
+                            `<div class="card col shadow p-3 my-3 mx-2">
                                 <div class="card-body">
                                     <div class="card-title">
                                         <h3>${value.title}</h3>
@@ -60,11 +86,12 @@
                         if(index == 0){
                             $('#header-title').append(`<h1><b>${value.title}</b></h1>`);
                         }else{
+
                             $('#header-title').append(`<p class="lead">${value.descript}</p>`);
                         }
 
                     });
-                    $('#header-title').append(`<button class="btn btn-primary px-5 shadow">Contact Us</button>`)
+                    $('#header-title').append(`<a class="btn btn-primary px-5 shadow" href="#footer">Contact Us</a>`)
                 }
             })
 
@@ -82,7 +109,7 @@
 </head>
 <body class="bg-light">
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg bg navbar-dark">
+    <nav class="navbar navbar-expand-lg bg navbar-dark fixed-top" id="nav">
         <div class="container">
             <div class="navbar-brand">
                 <span id="branding-text" class="text-light">
@@ -96,13 +123,13 @@
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-3">
-                        <a href="" class="nav-link">About Us</a>
+                        <a href="#about-us" class="nav-link">About Us</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a href="#services" class="nav-link">Services</a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a href="" class="nav-link">Contact Us</a>
+                        <a href="#footer" class="nav-link">Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -110,21 +137,22 @@
     </nav>
 
     <!-- Header -->
-    <div class="container d-md-flex justify-content-between align-items-center my-5 my-md-1 text-center text-md-start" id="container-bg">
-        <div id="header-title" class="col">
-            
-        </div>
-
-        <div id="header-image" class="col">
-            
+    <div class="container-fluid p-5 p-md-1" id="container-bg">
+        <div class="container d-md-flex justify-content-between align-items-center my-5 my-md-1 text-center text-md-start">
+            <div id="header-title" class="col ms-3">
+                
+            </div>
+    
+            <div id="header-image" class="col">
+                
+            </div>
         </div>
     </div>
+    
 
     <!-- About Us -->
-    <div class="p-5 bg text-light text-center text-md-start">
+    <div class="p-5 bg text-light text-center text-md-start" id="about-us">
         <div class="container">
-            <h1><b>WE CLEAN...</b></h1>
-            <p class="lead">We are a cleaning company with a huge pool of cleaning professionals</p>
         </div>
     </div>
     
@@ -132,7 +160,7 @@
     <div class="container text-center" id="services">
         <h1 class="text-center mt-5 fs-1"><b>Our Services</b></h1>
 
-        <div id="services-here" class="d-md-flex justify-content-evenly p-4 text-center">
+        <div id="services-here" class="d-lg-flex justify-content-evenly p-4 text-center">
 
         </div>
 
@@ -144,23 +172,7 @@
     <!-- footer -->
 
     <div class="p-5 text-light text-center bg" id="footer">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="col col-md-2">
-                <img src="admin/images/logo-modified.png" class="img-fluid" alt="">
-                <h3>CMB Staffing Inc.</h3>
-            </div>
-            <div class="col col-md-6">
-                <h1>Call us TODAY for your free estimates!</h1>
-                <h1>647-575-5841 or 647-267-5841</h1>
-                <br>
-                <br>
-
-                <p><b>Office: 1470 Eglinton Ave, West Toronto, ON M6E 2G6</b></p>
-                <p><b>Phone: 647-575-5841 or 647-267-5841</b></p>
-                <p><b>Email: topskillstaffinginc@yahoo.ca</b></p>
-            </div>
-            
-        </div>
+        
     </div>
 </body>
 </html>

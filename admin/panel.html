@@ -24,12 +24,53 @@
             var serviceTitle = $('#service-title');
             var serviceDescription = $('#service-description');
             var addService = $('#add-service');
+            var office = $('#office');
+            var email = $('#email');
+            var contact = $('#contact');
+            var updateFooter = $('#update-footer');
+
+            $.ajax({
+                type: 'GET',
+                url: '../getFooterDetails.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+
+                    email.val(data.email);
+                    contact.val(data.phone);
+                    office.val(data.office);
+                }
+            })
+
             $.ajax({
                 type: 'GET',
                 url: 'getBrandingName.php',
                 success: function(response){
+                    try{
+                        var data = JSON.parse(response);
+                        nav_container.append(`<div class="navbar-brand">${data.branding_name}</div>`);
+                        brandingName.val(data.branding_name);
+                    }catch(e){
+                        window.location.replace(response);
+                        
+                    }
+                }
+            })
+
+            $.ajax({
+                type: 'GET',
+                url: 'getHeaderTitleAndText.php',
+                success: function(response){
                     var data = JSON.parse(response);
-                    nav_container.append(`<div class="navbar-brand">${data.branding_name}</div>`);
+
+                    $(data).each(function(index, value){
+                        if(index == 0){
+                            headerTitleText.val(value.title);
+                        }else{
+
+                            headerDescText.val(value.descript);
+                        }
+
+                    });
                 }
             })
 
@@ -37,9 +78,33 @@
                 type: 'GET',
                 url: 'getBrandingImage.php',
                 success: function(response){
-                    var data = JSON.parse(response);
-                    console.log(data.branding_image);
-                    logo.attr('src', data.branding_image);
+                    try{
+                        var data = JSON.parse(response);
+                        console.log(data.branding_image);
+                        logo.attr('src', data.branding_image);
+                    }catch(e){
+                        console.log(response);
+                    }
+                    
+                }
+            })
+
+            updateFooter.on('click', function(e){
+                e.preventDefault();
+
+                if(contact.val() != "" && email.val() != "" && office.val() != ''){
+                    $.ajax({
+                        type: 'POST',
+                        url: 'updateFooter.php',
+                        data: {contactInfo: contact.val(), emailInfo: email.val(), officeInfo: office.val()},
+                        success: function(response){
+                            console.log(response);
+                            if(response == 'inserted' || response == 'updated'){
+                                $('#footer-updated-toast').toast({delay:5000});
+                                $('#footer-updated-toast').toast("show");
+                            }
+                        }
+                    })
                 }
             })
             addService.on('click', function(e){
@@ -141,17 +206,26 @@
 </head>
 <body class="bg-light">
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg">
+    <nav class="navbar navbar-expand-lg navbar-dark bg fixed-top">
         <div class="container" id="nav-container">
             <div id="branding-here"></div>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Contents</a>
+                        <a href="#branding" class="nav-link px-4">Branding</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Account</a>
+                        <a href="#header" class="nav-link px-4">Header</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link px-4">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#site-footer" class="nav-link px-4">Footer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-4">Account</a>
                     </li>
                 </ul>
             </div>
@@ -160,7 +234,7 @@
 
     <!-- Branding Image -->
 
-    <div class="container mt-3">
+    <div class="container mt-3" id="branding">
         <div class="card">
             <div class="card-body p-5">
                 <h1>Site Branding</h1>
@@ -198,7 +272,7 @@
 
     <!-- Site Header -->
 
-    <div class="container">
+    <div class="container" id="header">
         <div class="card mt-3">
             <div class="card-body p-5">
                 <h1>Site Header</h1>
@@ -238,7 +312,7 @@
     </div>
 
     <!-- Services -->
-    <div class="container">
+    <div class="container" id="services">
         <div class="card mt-3">
             <div class="card-body p-5">
                 <h1>Services</h1>
@@ -262,6 +336,46 @@
 
                 <div class="d-grid gap-2 d-md-block">
                     <button class="btn btn-primary mt-3 px-5" id="add-service"><b>Add</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <div class="container" id="site-footer">
+        <div class="card my-3">
+            <div class="card-body p-5">
+                <h1>Site Footer</h1>
+                <hr>
+
+                <div class="row my-2">
+                    <div class="col-md-5">
+                        <b>Contact Information</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="contact" required>
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-5">
+                        <b>Office</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="office" required>
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-5">
+                        <b>Email</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="email" required>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary mt-3 px-5" id="update-footer"><b>Save</b></button>
                 </div>
             </div>
         </div>
@@ -307,6 +421,17 @@
             <div class="d-flex">
                 <div class="toast-body">
                     Site Service has been added!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <!-- site footer toast -->
+    <div class="container">
+        <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="footer-updated-toast">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Site Footer has been updated!
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>

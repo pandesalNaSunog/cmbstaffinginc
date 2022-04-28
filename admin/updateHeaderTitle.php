@@ -2,8 +2,8 @@
     include('connection.php');
     $con = connect();
 
-    if(isset($_POST['header_description'])){
-        $title = $_POST['header_description'];
+    if(isset($_POST['header_title'])){
+        $title = $_POST['header_title'];
         $query = "SELECT * FROM header_title";
         $headerTitle = $con->query($query) or die($con->error);
 

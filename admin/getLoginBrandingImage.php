@@ -1,6 +1,12 @@
 <?php
 
-    
+    if(!isset($_SESSION)){
+        session_start();
+    }
+
+    if(isset($_SESSION['email'])){
+        echo 'panel.html';
+    }else{
         include('connection.php');
         $con = connect();
 
@@ -11,5 +17,6 @@
             $row = $branding_image->fetch_assoc();
             echo json_encode($row);
         }
+    }
     
 ?>

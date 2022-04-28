@@ -17,10 +17,15 @@
 
             $.ajax({
                 type: 'GET',
-                url: 'getBrandingImage.php',
+                url: 'getLoginBrandingImage.php',
                 success: function(response){
-                    var data = JSON.parse(response);
-                    logo.attr('src', data.branding_image);
+                    try{
+                        var data = JSON.parse(response);
+                        logo.attr('src', data.branding_image);
+                    }catch(e){
+                        window.location.replace(response);
+                    }
+                    
                 }
             })
             
