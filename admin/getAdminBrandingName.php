@@ -1,6 +1,12 @@
 <?php
 
+    if(!isset($_SESSION)){
+        session_start();    
+    }
     
+    if(!isset($_SESSION['email'])){
+        echo 'index.html'; 
+    }else{
         include('connection.php');
         $con = connect();
 
@@ -14,5 +20,6 @@
 
             echo json_encode($row);
         }
+    }
     
 ?>

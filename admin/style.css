@@ -31,11 +31,6 @@
     height: 500px;
 } */
 
-#footer{
-    font-family: 'Times New Roman', Times, serif;
-    line-height: normal;
-}
-
 body::before{
     height: 100px;
     content: '';
@@ -65,4 +60,8 @@ body::before{
 
 #service-list{
     overflow-x: auto;
+}
+
+#office-phone-email{
+    font-family: sans-serif;
 }

@@ -17,24 +17,48 @@
                 url: 'getFooterDetails.php',
                 success: function(response){
                     var data = JSON.parse(response);
-
-                    $('#footer').append(`<div class="container d-md-flex justify-content-between align-items-center">
-                                            <div class="col col-md-2">
-                                                <img src="admin/images/logo-modified.png" class="img-fluid" alt="">
-                                                <h3>CMB Staffing Inc.</h3>
+                    var image = "";
+                    var phone = "";
+                    var office = "";
+                    var email = "";
+                    $(data).each(function(index, value){
+                        if(index == 0){
+                            phone = value.phone;
+                            office = value.office;
+                            email = value.email;
+                        }else{
+                            image = value.branding_image;
+                        }
+                    })
+                    $('#footer').append(`<div class="container-fluid d-md-flex justify-content-evenly align-items-center">
+                                            <div id="office-phone-email" class="col col-md-2 text-start text-light">
+                                                <p class="lh-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
+                                                    <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
+                                                    </svg>:     ${office}<br><br>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                                    </svg>:     ${phone}<br><br>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                                                    </svg>:     ${email}<br><br>
+                                                </p>
                                             </div>
-                                            <div class="col col-md-6">
-                                                <h1>Call us TODAY for your free estimates!</h1>
-                                                <h1>${data.phone}</h1>
+                                            <div class="col col-md-4">
+                                                <h2>Call us TODAY for your free estimates!</h1>
+                                                <h2>${phone}</h2>
                                                 <br>
                                                 <br>
-
-                                                <p><b>Office: ${data.office}</b></p>
-                                                <p><b>Phone: ${data.phone}</b></p>
-                                                <p><b>Email: ${data.email}</b></p>
+                                            </div>
+                                            
+                                            <div class="col col-md-2">
+                                                <img src="admin/${image}" class="img-fluid" alt="">
+                                                <h3>CMB Staffing Inc.</h3>
                                             </div>
                                             
                                         </div>`);
+                    // console.log(response);
                 }
             })
 

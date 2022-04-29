@@ -56,10 +56,14 @@
                 url: '../getFooterDetails.php',
                 success: function(response){
                     var data = JSON.parse(response);
-
-                    email.val(data.email);
-                    contact.val(data.phone);
-                    office.val(data.office);
+                    $(data).each(function(index, value){
+                        if(index == 0){
+                            email.val(value.email);
+                            contact.val(value.phone);
+                            office.val(value.office);
+                        }
+                    })
+                    console.log(response);
                 }
             })
 
@@ -73,9 +77,9 @@
                         serviceBody.append(`<tr>
                                                 <td>${value.title}</td>
                                                 <td>${value.description}</td>
-                                                <td class="d-flex">
+                                                <td class="d-md-flex">
                                                     <button class="btn btn-primary edit" data-bs-toggle="modal" data-bs-target="#exampleModal" value="${value.id}">Edit</span>
-                                                    <button class="btn btn-danger ms-2 delete" value="${value.id}">Delete</span>
+                                                    <button class="btn btn-danger ms-md-2 mt-2 mt-md-0 delete" value="${value.id}">Delete</span>
                                                 </td>
                                             </tr>
                                             `);
@@ -121,7 +125,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: 'getBrandingName.php',
+                url: 'getAdminBrandingName.php',
                 success: function(response){
                     try{
                         var data = JSON.parse(response);
@@ -493,7 +497,7 @@
                     <p><b>Service Title</b></p>
                     <input type="text" id="editServiceTitle" class="form-control">
                     <p><b>Service Description</b></p>
-                    <input type="text" id="editServiceDescription" class="form-control">
+                    <textarea id="editServiceDescription" class="form-control"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="edit-service-save-changes" data-bs-dismiss="modal">Save changes</button>
