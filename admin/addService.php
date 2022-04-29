@@ -19,7 +19,10 @@
         }else{
             $query = "INSERT INTO services(`title`, `description`) VALUES ('$serviceTitle', '$serviceDescription')";
             $con->query($query) or die($con->error);
-            $response = "success";
+            $query = "SELECT * FROM services WHERE title = '$serviceTitle' AND description = '$serviceDescription'";
+            $service = $con->query($query) or die($con->error);
+            $row = $service->fetch_assoc();
+            $response = json_encode($row);
         }
 
         echo $response;
