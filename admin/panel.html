@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="js/jquery.js"></script>
     <script>
@@ -34,23 +35,7 @@
             var saveServiceChanges = $('#edit-service-save-changes');
             
 
-            saveServiceChanges.on('click', function(e){
-                e.preventDefault();
-                var serviceId = $(this).val();
-                if(editServiceTitle != "" && editServiceDescription != ""){
-                    $.ajax({
-                        type: 'POST',
-                        url: 'updateSpecificService.php',
-                        data: {service_id: serviceId, service_title: editServiceTitle.val(), service_description: editServiceDescription.val()},
-                        success: function(response){
-                            if(response == 'updated'){
-                                $('#service-updated-toast').toast({delay:5000});
-                                $('#service-updated-toast').toast("show");
-                            }
-                        }
-                    })
-                }
-            })
+            
             $.ajax({
                 type: 'GET',
                 url: '../getFooterDetails.php',
@@ -115,6 +100,24 @@
                                     editServiceTitle.val(data.title);
                                     editServiceDescription.val(data.description);
                                     saveServiceChanges.val(data.id);
+
+                                    saveServiceChanges.on('click', function(e){
+                                        e.preventDefault();
+                                        var serviceId = $(this).val();
+                                        if(editServiceTitle != "" && editServiceDescription != ""){
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: 'updateSpecificService.php',
+                                                data: {service_id: serviceId, service_title: editServiceTitle.val(), service_description: editServiceDescription.val()},
+                                                success: function(response){
+                                                    if(response == 'updated'){
+                                                        $('#service-updated-toast').toast({delay:5000});
+                                                        $('#service-updated-toast').toast("show");
+                                                    }
+                                                }
+                                            })
+                                        }
+                                    })
                                 }
                             });
                         });

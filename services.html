@@ -9,13 +9,27 @@
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
     <script type="text/javascript" src="admin/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="admin/js/jquery.js"></script>
+    <title>Services</title>
 
     <script>
         $(document).ready(function(){
-
-            $('#view-services').on('click', function(){
-                window.location.replace('services.html')
+            $.ajax({
+                type: 'GET',
+                url: 'admin/getBrandingImage.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+                    $('.navbar-brand').prepend(`<img src="admin/${data.branding_image}" class="img-fluid" id="branding-img">`);
+                }
             })
+            $.ajax({
+                type: 'GET',
+                url: 'admin/getBrandingName.php',
+                success: function(response){
+                    var data = JSON.parse(response);
+                    $('#branding-text').prepend(data.branding_name);
+                }
+            })
+
             $.ajax({
                 type: 'GET',
                 url: 'getFooterDetails.php',
@@ -68,75 +82,30 @@
 
             $.ajax({
                 type: 'GET',
-                url: 'getServices.php',
-                success: function(response){
-                    var data = JSON.parse(response);
-
-                    $(data).each(function(index,value){
-                        $('#services-here').append(
-                            `<div class="card col shadow p-3 my-3 mx-2">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <h3>${value.title}</h3>
-
-                                        <p class="lead">${value.description}</p>
-                                    </div>
-                                </div>
-                            </div>`)
-                    });
-                }
-            })
-            $.ajax({
-                type: 'GET',
-                url: 'admin/getBrandingImage.php',
-                success: function(response){
-                    var data = JSON.parse(response);
-                    $('.navbar-brand').prepend(`<img src="admin/${data.branding_image}" class="img-fluid" id="branding-img">`);
-                }
-            })
-
-            $.ajax({
-                type: 'GET',
-                url: 'admin/getBrandingName.php',
-                success: function(response){
-                    var data = JSON.parse(response);
-                    $('#branding-text').prepend(data.branding_name);
-                }
-            })
-
-            $.ajax({
-                type: 'GET',
-                url: 'admin/getHeaderTitleAndText.php',
+                url: 'getAllServices.php',
                 success: function(response){
                     var data = JSON.parse(response);
 
                     $(data).each(function(index, value){
-                        if(index == 0){
-                            $('#header-title').append(`<h1><b>${value.title}</b></h1>`);
-                        }else{
+                        $('#services-here').append(
+                                `<div class="card col shadow p-3 my-3 mx-2">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3>${value.title}</h3>
 
-                            $('#header-title').append(`<p class="lead">${value.descript}</p>`);
-                        }
-
-                    });
-                    $('#header-title').append(`<a class="btn btn-primary px-5 shadow" href="#footer">Contact Us</a>`)
+                                            <p class="lead">${value.description}</p>
+                                        </div>
+                                    </div>
+                                </div>`)
+                    })
                 }
-            })
 
-            $.ajax({
-                type: 'GET',
-                url: 'admin/getBrandingImage.php',
-                success: function(response){
-                    var data = JSON.parse(response);
-                    $('#header-image').append(`<img src="admin/${data.branding_image}" class="img-fluid d-none d-md-block" id="header-img">`);
-                }
             })
-        });
+        })
     </script>
-    <title>CMB Staffing Inc.</title>
 </head>
-<body class="bg-light">
-    <!-- NavBar -->
+<body>
+    <!-- navBar -->
     <nav class="navbar navbar-expand-lg bg navbar-dark fixed-top" id="nav">
         <div class="container">
             <div class="navbar-brand">
@@ -151,53 +120,20 @@
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-3">
-                        <a href="#container-bg" class="nav-link"><b>About Us</b></a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a href="#services" class="nav-link"><b>Services</b></a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a href="#footer" class="nav-link"><b>Contact Us</b></a>
+                        <a href="index.html" class="nav-link"><b>Go to Homepage</b></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Header -->
-    <div class="container-fluid p-5 p-md-1" id="container-bg">
-        <div class="container d-md-flex justify-content-between align-items-center my-5 my-md-1 text-center text-md-start">
-            <div id="header-title" class="col ms-3">
-                
-            </div>
-    
-            <div id="header-image" class="col">
-                
-            </div>
-        </div>
-    </div>
-    
-
-    <!-- About Us -->
-    <div class="p-5 bg text-light text-center text-md-start" id="about-us">
-        <div class="container">
-        </div>
-    </div>
-    
-    <!-- Services -->
     <div class="container text-center" id="services">
         <h1 class="text-center mt-5 fs-1"><b>Our Services</b></h1>
 
-        <div id="services-here" class="d-lg-flex justify-content-evenly p-4 text-center">
+        <div id="services-here" class="mx-md-5 p-4 text-center">
 
-        </div>
-
-        <div class="d-grid gap-2 d-md-block mb-5">
-            <button class="btn btn-primary mt-3 px-5" id="view-services"><b>See More...</b></button>
         </div>
     </div>
-
-    <!-- footer -->
 
     <div class="p-5 text-light text-center bg" id="footer">
         
