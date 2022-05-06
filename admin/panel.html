@@ -33,7 +33,20 @@
             var editServiceTitle = $('#editServiceTitle');
             var editServiceDescription = $('#editServiceDescription');
             var saveServiceChanges = $('#edit-service-save-changes');
-            
+            var logout = $('#logout');
+
+            logout.on('click', function(){
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'logout.php',
+                    success: function(response){
+                        if(response == 'ok'){
+                            window.location.replace('index.html');
+                        }
+                    }
+                })
+            })
 
             
             $.ajax({
@@ -356,7 +369,12 @@
                         <a href="#site-footer" class="nav-link px-4">Footer</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link px-4">Account</a>
+                        <div class="dropdown">
+                            <a href="#" class="nav-link px-4 dropdown-toggle" data-bs-toggle="dropdown">Account</a>
+                            <ul class="dropdown-menu">
+                                <li><button class="dropdown-item" id="logout">Log Out</button></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -544,6 +562,31 @@
 
                 <div class="d-grid gap-2 d-md-block">
                     <button class="btn btn-primary mt-3 px-5" id="update-footer"><b>Save</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card my-3">
+            <div class="card-body p-5">
+                <h1>Update Account</h1>
+                <hr>
+                <div class="row my-2">
+                    <div class="col-md-5">
+                        <b>Email</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-5">
+                        <b>Password</b>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control">
+                    </div>
                 </div>
             </div>
         </div>

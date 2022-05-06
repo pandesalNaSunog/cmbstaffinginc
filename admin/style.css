@@ -65,3 +65,7 @@ body::before{
 #office-phone-email{
     font-family: sans-serif;
 }
+
+.hr{
+    border: 2px solid #1A0058;
+}
