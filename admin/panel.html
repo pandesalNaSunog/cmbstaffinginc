@@ -75,9 +75,9 @@
                         serviceBody.append(`<tr>
                                                 <td>${value.title}</td>
                                                 <td>${value.description}</td>
-                                                <td class="d-md-flex">
+                                                <td class="d-lg-flex">
                                                     <button class="btn btn-primary edit" data-bs-toggle="modal" data-bs-target="#exampleModal" value="${value.id}">Edit</span>
-                                                    <button class="btn btn-danger ms-md-2 mt-2 mt-md-0 delete" value="${value.id}">Delete</span>
+                                                    <button class="btn btn-danger ms-lg-2 mt-2 mt-lg-0 delete" value="${value.id}">Delete</span>
                                                 </td>
                                             </tr>
                                             `);
@@ -308,7 +308,7 @@
                 e.preventDefault();
                 if(brandingLogo.val() != ""){
 
-                    var form_data = new FormData();
+                    var form_data = new Forlgata();
                     form_data.append('branding_image', brandingLogo[0].files[0]);
                     $.ajax({
                         type: 'POST',
@@ -392,12 +392,12 @@
                     <form action="">
                     
                         <div class="row my-3">
-                            <label class="form-label labels p-md-3 col-md-5"><b>Site Logo</b></label>
-                            <div class="col-md-7">
-                                <input type="file" class="form-control mt-md-3 controls" id="branding-logo" required>
+                            <label class="form-label labels p-lg-3 col-lg-5"><b>Site Logo</b></label>
+                            <div class="col-lg-7">
+                                <input type="file" class="form-control mt-lg-3 controls" id="branding-logo" required>
                                 <img src="" class="img-fluid border-dark img-thumbnail mt-3 logo" id="official-logo">
                             </div>
-                            <div class="d-grid gap-2 d-md-block">
+                            <div class="d-grid gap-2 d-lg-block">
                                 <button class="btn btn-primary mt-3 px-5" id="update-branding-logo"><b>Save</b></button>
                             </div>
                         </div>
@@ -406,10 +406,10 @@
 
                     <form action="">
                         <div class="row my-3">
-                            <label class="form-label labels p-md-3 col-md-5"><b>Site Branding Name</b></label>
-                            <input type="text" class="form-control mt-md-3 controls col-md-7" id="branding-name" required>
+                            <label class="form-label labels p-lg-3 col-lg-5"><b>Site Branding Name</b></label>
+                            <input type="text" class="form-control mt-lg-3 controls col-lg-7" id="branding-name" required>
                         </div>
-                        <div class="d-grid gap-2 d-md-block">
+                        <div class="d-grid gap-2 d-lg-block">
                             <button class="btn btn-primary mt-3 px-5" id="update-branding-name"><b>Save</b></button>
                         </div>
                     </form>
@@ -430,13 +430,13 @@
                     <div class="row my-3">
                         
                     
-                            <div class="col-md-5">
+                            <div class="col-lg-5">
                                 <b>Site Header Title</b>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <input type="text" class="form-control" id="header-title-text" required>
                             </div>
-                            <div class="d-grid gap-2 d-md-block">
+                            <div class="d-grid gap-2 d-lg-block">
                                 <button class="btn btn-primary mt-3 px-5" id="update-header-title"><b>Save</b></button>
                             </div>
                         
@@ -444,13 +444,13 @@
                 </form>
                 <form action="">
                     <div class="row my-3">
-                        <div class="col-md-5">
+                        <div class="col-lg-5">
                                 <b>Site Header Description</b>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <input type="text" class="form-control" id="header-description-text" required>
                             </div>
-                            <div class="d-grid gap-2 d-md-block">
+                            <div class="d-grid gap-2 d-lg-block">
                                 <button class="btn btn-primary mt-3 px-5" id="update-header-description"><b>Save</b></button>
                             </div>
                         
@@ -467,23 +467,23 @@
                 <h1>Services</h1>
                 <hr>
                 <div class="row my-5">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Service Title</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="service-title" required>
                     </div>
                 </div>
                 <div class="row my-5">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Service Description</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="service-description" required>
                     </div>
                 </div>
 
-                <div class="d-grid gap-2 d-md-block">
+                <div class="d-grid gap-2 d-lg-block">
                     <button class="btn btn-primary mt-3 px-5" id="add-service"><b>Add</b></button>
                 </div>
 
@@ -536,31 +536,31 @@
                 <hr>
 
                 <div class="row my-2">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Contact Information</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="contact" required>
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Office</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="office" required>
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Email</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="email" required>
                     </div>
                 </div>
 
-                <div class="d-grid gap-2 d-md-block">
+                <div class="d-grid gap-2 d-lg-block">
                     <button class="btn btn-primary mt-3 px-5" id="update-footer"><b>Save</b></button>
                 </div>
             </div>
@@ -573,18 +573,18 @@
                 <h1>Update Account</h1>
                 <hr>
                 <div class="row my-2">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Email</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control">
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <b>Password</b>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control">
                     </div>
                 </div>

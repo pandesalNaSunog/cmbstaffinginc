@@ -34,8 +34,8 @@
                             image = value.branding_image;
                         }
                     })
-                    $('#footer').append(`<div class="container-fluid d-md-flex justify-content-evenly align-items-center">
-                                            <div id="office-phone-email" class="col col-md-2 text-start text-light">
+                    $('#footer').append(`<div class="container-fluid d-lg-flex justify-content-evenly align-items-center">
+                                            <div id="office-phone-email" class="col col-lg-2 text-start text-light">
                                                 <p class="lh-sm">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
@@ -49,14 +49,14 @@
                                                     </svg>:     ${email}<br><br>
                                                 </p>
                                             </div>
-                                            <div class="col col-md-4">
+                                            <div class="col col-lg-4">
                                                 <h2>Call us TODAY for your free estimates!</h1>
                                                 <h2>${phone}</h2>
                                                 <br>
                                                 <br>
                                             </div>
                                             
-                                            <div class="col col-md-2">
+                                            <div class="col col-lg-2">
                                                 <img src="admin/${image}" class="img-fluid" alt="">
                                                 <h3>CMB Staffing Inc.</h3>
                                             </div>
@@ -128,7 +128,7 @@
                 url: 'admin/getBrandingImage.php',
                 success: function(response){
                     var data = JSON.parse(response);
-                    $('#header-image').append(`<img src="admin/${data.branding_image}" class="img-fluid d-none d-md-block" id="header-img">`);
+                    $('#header-image').append(`<img src="admin/${data.branding_image}" class="img-fluid d-none d-lg-block" id="header-img">`);
                 }
             })
         });
@@ -165,8 +165,8 @@
     </nav>
 
     <!-- Header -->
-    <div class="container-fluid p-5 p-md-1" id="container-bg">
-        <div class="container d-md-flex justify-content-between align-items-center my-5 my-md-1 text-center text-md-start">
+    <div class="container-fluid p-5 p-lg-1" id="container-bg">
+        <div class="container d-lg-flex justify-content-between align-items-center my-5 my-lg-1 text-center text-lg-start">
             <div id="header-title" class="col ms-3">
                 
             </div>
@@ -184,12 +184,12 @@
             <h1><b>About Us</b></h1>
             <hr>
             <div class="row d-flex align-items-center">
-                <div class="text-md-start col-md-6">
+                <div class="text-lg-start col-lg-6">
                     <p class="lead"><span class="text-warning fs-1"><b>W</b></span>e at CMB Staffing Inc. have been in business since 1999 and we know that it requires awesome talent to make a business succeed so let us provide the talents</p>
                     <p class="lead">Our business are employment, cleaning, and maintenance solutions.</p>
                     <p class="lead">Once we have built a successful partnership, you won't have to find another company. Our unwavering commitment and service dictates our history and we want to share that stride with you. You will always be confident with us and ou will always be satisfied.</p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-lg-6">
                     <img src="admin/images/about_us.png" alt="" class="img-fluid">
                 </div>
             </div>
@@ -204,7 +204,7 @@
 
         </div>
 
-        <div class="d-grid gap-2 d-md-block mb-5">
+        <div class="d-grid gap-2 d-lg-block mb-5">
             <button class="btn btn-primary mt-3 px-5" id="view-services"><b>See More...</b></button>
         </div>
     </div>
