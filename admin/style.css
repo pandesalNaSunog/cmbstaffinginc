@@ -48,7 +48,7 @@ body::before{
 #container-bg::before{
     z-index: -1;
     content: '';
-    background: url('images/staff.jpg');
+    background: url('images/header_image.jpg');
     background-size: cover;
     position: absolute;
     top: 0px;
