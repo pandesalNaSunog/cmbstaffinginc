@@ -42,7 +42,8 @@
                 type: 'GET',
                 url: 'getAdminEmail.php',
                 success: function(response){
-                    updateEmail.val(response);
+                    var data = JSON.parse(response);
+                    updateEmail.val(data.email);
                 }
             })
 
