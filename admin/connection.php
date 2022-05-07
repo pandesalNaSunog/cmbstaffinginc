@@ -1,9 +1,9 @@
 <?php
     function connect(){
         $hostname="localhost";
-        $username="root";
-        $password="";
-        $database="cmb_db";
+        $username="u568496919_pande";
+        $password="Viperdodge11";
+        $database="u568496919_cmb";
 
         $con=new mysqli($hostname,$username,$password,$database);
 
