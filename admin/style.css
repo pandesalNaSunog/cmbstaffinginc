@@ -51,6 +51,7 @@ body::before{
     background: url('images/header_image.jpg');
     background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     position: absolute;
     top: 0px;
     bottom: 0px;
