@@ -34,7 +34,26 @@
             var editServiceDescription = $('#editServiceDescription');
             var saveServiceChanges = $('#edit-service-save-changes');
             var logout = $('#logout');
+            var updateButton = $('#update-creds');
+            var updateEmail = $('#update-email');
+            var updatePassword = $('#update-password');
 
+            updateButton.on('click', function(e){
+                e.preventDefault();
+
+                if(updateEmail.val() != "" && updatePassword != ""){
+                    $.ajax({
+                        type: 'POST',
+                        url: 'updateAdminCreds.php',
+                        data: {email: updateEmail.val(), password: updatePassword.val()},
+                        success: function(response){
+                            if(response == 'ok'){
+                                window.location.replace('index.html');
+                            }
+                        }
+                    })
+                }
+            })
             logout.on('click', function(){
 
                 $.ajax({
@@ -577,7 +596,7 @@
                         <b>Email</b>
                     </div>
                     <div class="col-lg-7">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="update-email">
                     </div>
                 </div>
                 <div class="row my-2">
@@ -585,9 +604,22 @@
                         <b>Password</b>
                     </div>
                     <div class="col-lg-7">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="update-password">
                     </div>
                 </div>
+                <div class="d-grid gap-2 d-lg-block">
+                    <button class="btn btn-primary mt-3 px-5" id="update-creds"><b>Save</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Site Brand Name has been updated!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
