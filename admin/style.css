@@ -49,7 +49,7 @@ body::before{
     z-index: -1;
     content: '';
     background: url('images/header_image.jpg');
-    background-size: cover;
+    background-size: contain;
     position: absolute;
     top: 0px;
     bottom: 0px;
