@@ -38,6 +38,14 @@
             var updateEmail = $('#update-email');
             var updatePassword = $('#update-password');
 
+            $.ajax({
+                type: 'GET',
+                url: 'getAdminEmail.php',
+                success: function(response){
+                    updateEmail.val(response);
+                }
+            })
+
             updateButton.on('click', function(e){
                 e.preventDefault();
 
