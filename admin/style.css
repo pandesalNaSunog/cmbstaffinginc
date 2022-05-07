@@ -50,6 +50,7 @@ body::before{
     content: '';
     background: url('images/header_image.jpg');
     background-size: contain;
+    background-position: center;
     position: absolute;
     top: 0px;
     bottom: 0px;
