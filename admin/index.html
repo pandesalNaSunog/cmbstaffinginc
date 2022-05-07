@@ -34,7 +34,7 @@
             
             login.on('click', function(e){
                 
-                if(email.val() != ""){
+                if(email.val() != "" && password.val() != ""){
                     e.preventDefault();
                     $.ajax({
                         type: 'POST',

@@ -50,7 +50,7 @@
             updateButton.on('click', function(e){
                 e.preventDefault();
 
-                if(updateEmail.val() != "" && updatePassword != ""){
+                if(updateEmail.val() != "" && updatePassword.val() != ""){
                     $.ajax({
                         type: 'POST',
                         url: 'updateAdminCreds.php',
