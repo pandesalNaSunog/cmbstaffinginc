@@ -130,7 +130,7 @@
                             
                         });
 
-                        editButton.on('click', function(e){
+                    editButton.on('click', function(e){
                             var thisEdit = $(this);
                             var editServiceTitle = $('#editServiceTitle');
                             var editServiceDescription = $('#editServiceDescription');
@@ -152,7 +152,7 @@
                                         var serviceId = $(this).val();
                                         
                                         if(editServiceTitle.val() != "" && editServiceDescription.val() != "" && editServiceImage.val() != ""){
-                                            var formData = new FormData()
+                                            var formData = new FormData();
                                             formData.append('service_image', editServiceImage[0].files[0]);
                                             formData.append('service_id', serviceId);
                                             $.ajax({
@@ -253,18 +253,26 @@
                         }
                     })
                 }
-            })
+            });
             addService.on('click', function(e){
+                
                 e.preventDefault();
-
-                if(serviceTitle.val() != "" && serviceDescription.val() != ""){
+                if(serviceTitle.val() != "" && serviceDescription.val() != "" && serviceImage.val() != ""){
+                    var formData = new FormData();
+                    formData.append('title', serviceTitle.val());
+                    formData.append('description', serviceDescription.val());
+                    formData.append('serviceImage', serviceImage[0].files[0]);
                     $.ajax({
                         type: 'POST',
                         url: 'addService.php',
-                        data: {title: serviceTitle.val(), description: serviceDescription.val()},
+                        data: formData,
+                        contentType: false,
+                        processData: false,
                         success: function(response){
                             if(response == "already exists"){
                                 alert("This service already exists");
+                            }else if(response == "invalid image"){
+                                alert("Invalid file. Please select a valid image");
                             }else{
                                 var data = JSON.parse(response);
                                 $('#service-added-toast').toast({delay:5000});
@@ -281,42 +289,80 @@
                                             `);
                         
                         
-                                var editButton = $('.edit');
-                                var deleteButton = $('.delete');                        
-                                deleteButton.on('click', function(e){
-                                    var thisDelete = $(this);
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: 'deleteService.php',
-                                        data: {service_id: thisDelete.val()},
-                                        success: function(response){
-                                            if(response == 'deleted'){
-                                                thisDelete.parent().parent().remove();
-                                            }
-                                            
-                                        }
-                                    });
-                                    
-                                });
+                                            var editButton = $('.edit');
+                                            var deleteButton = $('.delete');                        
+                                            deleteButton.on('click', function(e){
+                                                var thisDelete = $(this);
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: 'deleteService.php',
+                                                    data: {service_id: thisDelete.val()},
+                                                    success: function(response){
+                                                        if(response == 'deleted'){
+                                                            thisDelete.parent().parent().remove();
+                                                        }
+                                                        
+                                                    }
+                                                });
+                                                
+                                            });
 
-                                editButton.on('click', function(e){
-                                    var thisEdit = $(this);
+                                            editButton.on('click', function(e){
+                                                var thisEdit = $(this);
+                                                var editServiceTitle = $('#editServiceTitle');
+                                                var editServiceDescription = $('#editServiceDescription');
+                                                var editServiceImage = $('#editServiceImage');
+                                                var saveServiceChanges = $('#edit-service-save-changes');
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    url: 'getSpecificService.php',
+                                                    data: {service_id: thisEdit.val()},
+                                                    success: function(response){
+                                                        var data = JSON.parse(response);
+                                                        editServiceTitle.val(data.title);                                                            editServiceDescription.val(data.description);
+                                                        saveServiceChanges.val(data.id);
+                                                        var modal = $('#exampleModal');
 
-                                    $.ajax({
-                                        type: 'GET',
-                                        url: 'getSpecificService.php',
-                                        data: {service_id: thisEdit.val()},
-                                        success: function(response){
-                                            var data = JSON.parse(response);
-                                            editServiceTitle.val(data.title);
-                                            editServiceDescription.val(data.description);
-                                            saveServiceChanges.val(data.id);
+                                                        saveServiceChanges.on('click', function(e){
+                                                            e.preventDefault();
+                                                            var serviceId = $(this).val();
+                                                            
+                                                            if(editServiceTitle.val() != "" && editServiceDescription.val() != "" && editServiceImage.val() != ""){
+                                                                var formData = new FormData();
+                                                                formData.append('service_image', editServiceImage[0].files[0]);
+                                                                formData.append('service_id', serviceId);
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    url: 'updateSpecificService.php',
+                                                                    data: {service_id: serviceId, service_title: editServiceTitle.val(), service_description: editServiceDescription.val()},
+                                                                    success: function(response){
+                                                                        if(response == 'updated'){
+                                                                            $('#service-updated-toast').toast({delay:5000});
+                                                                            $('#service-updated-toast').toast("show");
+                                                                        }
+                                                                    }
+
+
+                                                                })
+                                                                    
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    url: 'updateServiceImage.php',
+                                                                    data: formData,
+                                                                    contentType: false,
+                                                                    processData: false,
+                                                                    success: function(response){
+                                                                        console.log(response);
+                                                                    }
+                                                                })
+                                                            }
+                                                        })
+                                                    }
+                                                });
+                                            });
                                         }
-                                    });
-                                });
-                            }
-                        }
-                    })
+                                    }
+                                })
                 }
             });
             updateHeaderDescription.on('click', function(e){
