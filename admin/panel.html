@@ -37,7 +37,7 @@
             var updateButton = $('#update-creds');
             var updateEmail = $('#update-email');
             var updatePassword = $('#update-password');
-
+            var serviceImage = $('#service-image');
             $.ajax({
                 type: 'GET',
                 url: 'getAdminEmail.php',
@@ -508,6 +508,14 @@
                     </div>
                     <div class="col-lg-7">
                         <input type="text" class="form-control" id="service-description" required>
+                    </div>
+                </div>
+                <div class="row my-5">
+                    <div class="col-lg-5">
+                        <b>Service Image</b>
+                    </div>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="service-image" required>
                     </div>
                 </div>
 

@@ -41,7 +41,7 @@ body::before{
 }
 
 #nav{
-    background-color: #1A0058;
+    background-color: #1A0058 !important;
 }
 
 .logo{
