@@ -40,10 +40,6 @@ body::before{
     }
 }
 
-#nav{
-    background-color: #1A0058 !important;
-}
-
 .logo{
     width: 200px;
     height: 200px;
