@@ -9,7 +9,11 @@
 .controls{
     width: 100%;
 }
-
+body::before{
+    content: '';
+    display: block;
+    height: 100px;
+}
 
 @media(min-width: 992px){
     .controls{
@@ -30,9 +34,6 @@
     }
     #container-bg{
         color: black;
-    }
-    #nav{
-        background: none !important;
     }
     #title{
         font-size: 60px;
