@@ -11,10 +11,6 @@
 }
 
 
-#title{
-    font-size: 60px;
-}
-
 @media(min-width: 992px){
     .controls{
         width:60%;
@@ -37,6 +33,9 @@
     }
     #nav{
         background: none !important;
+    }
+    #title{
+        font-size: 60px;
     }
 }
 
@@ -72,7 +71,7 @@
 
 
 #header-title{
-    margin-top: 30%;
+    margin-top: 40%;
 }
 
 #container-bg::before{
