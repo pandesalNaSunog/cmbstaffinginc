@@ -1,5 +1,5 @@
 .bg{
-    background-color:#1A0058;
+    background-color: #1A0058;
 }
 
 .labels{
@@ -10,10 +10,38 @@
     width: 100%;
 }
 
+
+#title{
+    font-size: 60px;
+}
+
 @media(min-width: 768px){
     .controls{
         width:60%;
     }
+    #container-bg::after{
+        display: block;
+        content:'';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        background-color: #1A0058;
+        background-blend-mode: screen;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 23%);
+        z-index: -2;
+    }
+    #container-bg{
+        color: black;
+    }
+    #nav{
+        background: none !important;
+    }
+}
+
+#nav{
+    background-color: #1A0058;
 }
 
 .logo{
@@ -31,11 +59,7 @@
     height: 500px;
 } */
 
-body::before{
-    height: 100px;
-    content: '';
-    display: block;
-}
+
 
 #container-bg{
     /* background: url('images/staff.jpg');
@@ -43,6 +67,12 @@ body::before{
     width: 100%;
     height: 100%;
     position: relative;
+
+}
+
+
+#header-title{
+    margin-top: 30%;
 }
 
 #container-bg::before{
