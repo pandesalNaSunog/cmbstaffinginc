@@ -15,7 +15,17 @@ body::before{
     height: 100px;
 }
 
+.service-img{
+    width: 100% !important;
+    height: 100% !important;
+    border: 2px solid black;
+}
+
 @media(min-width: 992px){
+    .service-img{
+        width:30% !important;
+        height:30% !important;
+    }
     .controls{
         width:60%;
     }

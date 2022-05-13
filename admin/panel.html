@@ -101,6 +101,7 @@
                         serviceBody.append(`<tr>
                                                 <td>${value.title}</td>
                                                 <td>${value.description}</td>
+                                                <td><img src=${value.image} class="img-fluid service-img"></td>
                                                 <td class="d-lg-flex">
                                                     <button class="btn btn-primary edit" data-bs-toggle="modal" data-bs-target="#exampleModal" value="${value.id}">Edit</span>
                                                     <button class="btn btn-danger ms-lg-2 mt-2 mt-lg-0 delete" value="${value.id}">Delete</span>
@@ -596,6 +597,7 @@
                             <tr>
                                 <th scope="col">Service Title</th>
                                 <th scope="col">Service Description</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
