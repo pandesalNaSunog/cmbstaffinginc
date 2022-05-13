@@ -30,9 +30,7 @@
             var contact = $('#contact');
             var updateFooter = $('#update-footer');
             var serviceBody = $('#service-table-body');
-            var editServiceTitle = $('#editServiceTitle');
-            var editServiceDescription = $('#editServiceDescription');
-            var saveServiceChanges = $('#edit-service-save-changes');
+            
             var logout = $('#logout');
             var updateButton = $('#update-creds');
             var updateEmail = $('#update-email');
@@ -111,11 +109,14 @@
                                             `);
                         
                         
-                        var editButton = $('.edit');
-                        var deleteButton = $('.delete');                        
-                        deleteButton.on('click', function(e){
-                            var thisDelete = $(this);
-                            $.ajax({
+                        
+                    });
+
+                    var editButton = $('.edit');
+                    var deleteButton = $('.delete');                        
+                    deleteButton.on('click', function(e){
+                        var thisDelete = $(this);
+                        $.ajax({
                                 type: 'POST',
                                 url: 'deleteService.php',
                                 data: {service_id: thisDelete.val()},
@@ -131,7 +132,10 @@
 
                         editButton.on('click', function(e){
                             var thisEdit = $(this);
-
+                            var editServiceTitle = $('#editServiceTitle');
+                            var editServiceDescription = $('#editServiceDescription');
+                            var editServiceImage = $('#editServiceImage');
+                            var saveServiceChanges = $('#edit-service-save-changes');
                             $.ajax({
                                 type: 'GET',
                                 url: 'getSpecificService.php',
@@ -141,11 +145,16 @@
                                     editServiceTitle.val(data.title);
                                     editServiceDescription.val(data.description);
                                     saveServiceChanges.val(data.id);
+                                    var modal = $('#exampleModal');
 
                                     saveServiceChanges.on('click', function(e){
                                         e.preventDefault();
                                         var serviceId = $(this).val();
-                                        if(editServiceTitle != "" && editServiceDescription != ""){
+                                        
+                                        if(editServiceTitle.val() != "" && editServiceDescription.val() != "" && editServiceImage.val() != ""){
+                                            var formData = new FormData()
+                                            formData.append('service_image', editServiceImage[0].files[0]);
+                                            formData.append('service_id', serviceId);
                                             $.ajax({
                                                 type: 'POST',
                                                 url: 'updateSpecificService.php',
@@ -156,13 +165,25 @@
                                                         $('#service-updated-toast').toast("show");
                                                     }
                                                 }
+
+
+                                            })
+                                            
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: 'updateServiceImage.php',
+                                                data: formData,
+                                                contentType: false,
+                                                processData: false,
+                                                success: function(response){
+                                                    console.log(response);
+                                                }
                                             })
                                         }
                                     })
                                 }
                             });
                         });
-                    });
                     
                 }
             })
@@ -336,7 +357,7 @@
                 e.preventDefault();
                 if(brandingLogo.val() != ""){
 
-                    var form_data = new Forlgata();
+                    var form_data = new FormData();
                     form_data.append('branding_image', brandingLogo[0].files[0]);
                     $.ajax({
                         type: 'POST',
@@ -555,7 +576,11 @@
                     <input type="text" id="editServiceTitle" class="form-control">
                     <p><b>Service Description</b></p>
                     <textarea id="editServiceDescription" class="form-control"></textarea>
+                    <p><b>Service Image</b></p>
+                    <input type="file" id="editServiceImage" class="form-control">
                 </div>
+
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="edit-service-save-changes" data-bs-dismiss="modal">Save changes</button>
                 </div>
