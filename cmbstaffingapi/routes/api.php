@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/sample', [SampleController::class, 'sample']);
 Route::get('/branding', [BrandingController::class, 'branding']);
 Route::post('/update-branding-name', [BrandingController::class, 'changeBrandingName']);
+Route::post('/update-header-title', [HeaderController::class, 'updateHeader']);
