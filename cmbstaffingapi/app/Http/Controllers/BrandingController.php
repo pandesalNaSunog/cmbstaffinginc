@@ -12,4 +12,13 @@ class BrandingController extends Controller
 
         return response($branding, 200);
     }
+
+    public function changeBrandingName(Request $request){
+        $request->validate([
+            'branding_name' => 'required'
+        ]);
+
+        $brandingName = DB::table('branding')->update($request->all());
+        return response($brandingName, 200);
+    }
 }
