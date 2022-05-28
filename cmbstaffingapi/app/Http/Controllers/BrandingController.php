@@ -8,7 +8,7 @@ class BrandingController extends Controller
 {
     public function branding(){
 
-        $branding = DB::table('branding')->get();
+        $branding = DB::table('branding')->get()->first();
 
         return response($branding, 200);
     }
