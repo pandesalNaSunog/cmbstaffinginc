@@ -15,4 +15,10 @@ class ServiceController extends Controller
         $service = DB::table('services')->insert($request->all());
         return response($service, 200);
     }
+
+    public function getServices(){
+        $services = DB::table('services')->get();
+
+        return response($services, 200);
+    }
 }

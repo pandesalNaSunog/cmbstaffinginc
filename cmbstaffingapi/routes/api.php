@@ -23,3 +23,4 @@ Route::get('/branding', [BrandingController::class, 'branding']);
 Route::post('/update-branding-name', [BrandingController::class, 'changeBrandingName']);
 Route::post('/update-header-title', [HeaderController::class, 'updateHeader']);
 Route::post('/insert-service', [ServiceController::class, 'createService']);
+Route::get('/list-of-all-services', [ServiceController::class, 'getServices']);
