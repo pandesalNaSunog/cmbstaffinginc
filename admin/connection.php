@@ -10,10 +10,10 @@
         // $password="";
         // $database="cmb_db";
 
-        $con=new mysqli($hostname,$username,$password);
+        $con=new mysqli($hostname,$username,$password,$password);
 
-        if($con->connect_error){
-            echo $con->connect_error;
+        if(mysqli_connect_error()){
+            die("Database connection failed: " . mysqli_connect_error());
         }
 
         return $con;
