@@ -1,6 +1,6 @@
 <?php
     function connect(){
-        $hostname="localhost";
+        $hostname="127.0.0.1:3306";
         $username="u568496919_pande";
         $password="Viperdodge11";
         $database="u568496919_cmb";
