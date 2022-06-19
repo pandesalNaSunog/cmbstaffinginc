@@ -12,10 +12,6 @@
 
         $con=new mysqli($hostname,$username,$password,$password);
 
-        if(mysqli_connect_error()){
-            die("Database connection failed: " . mysqli_connect_error());
-        }
-
         return $con;
     }
     
