@@ -10,8 +10,7 @@
         // $password="";
         // $database="cmb_db";
 
-        $con=new mysqli($hostname,$username,$password,$password);
-
+        $con=new mysqli($hostname,$username,$password,$database);
         return $con;
     }
     
